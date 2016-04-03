@@ -34,7 +34,6 @@ public class AllSortTest {
 
 	@Test
 	public void testQuickSort() {
-		QuickSort sort = new QuickSort();
 		
 		//Integer[] data = new Integer[]{2,30,5,89,7,4,3};
 		List<Comparable> data1 = new ArrayList();
@@ -43,12 +42,17 @@ public class AllSortTest {
 			data1.add((long) (rnd.nextLong()%100));
 		//System.out.println(data0);
 		Long[] data2 = data1.toArray(new Long[]{});
+		List<Comparable> data3 = new ArrayList();
+		data3.addAll(data1);
 		
-		List<Comparable> result1 = sort.quickSort(data1);
+		List<Comparable> result1 = QuickSort.quickSort(data1);
+		QuickSort.quickSortInPlace(data3, 0, data3.size()-1);
 		Arrays.sort(data2);
 		//System.out.println(result1);
 		//System.out.println(Arrays.asList(data2));
-		for (int i=0; i<result1.size(); i++)
-			assertTrue(data1+"; \nSort to:"+Arrays.asList(result1), result1.get(i).compareTo(data2[i])==0);
+		for (int i=0; i<result1.size(); i++) {
+			assertTrue(data1+"; \nQuickSort to:"+Arrays.asList(result1), result1.get(i).compareTo(data2[i])==0);
+			assertTrue(data1+"; \nQuickSort(in place) to:"+Arrays.asList(data3), data3.get(i).compareTo(data2[i])==0);
+		}
 	}
 }
