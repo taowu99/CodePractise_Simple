@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -97,4 +98,33 @@ public class AllSortTest {
 			assertTrue(data1+"; \nQuickSort(in place) to:"+Arrays.asList(data3), data3.get(i).compareTo(data2[i])==0);
 		}
 	}
+
+
+	@Test
+	public void testMergeSort() {
+		MergeSort sort = new MergeSort();
+		
+		//Integer[] data = new Integer[]{2,30,5,89,7,4,3};
+		List<Comparable> data0 = new ArrayList();
+		Random rnd = new Random();
+		for (int i=0; i<1000; i++)
+			data0.add((long) (rnd.nextLong()%1000000));
+		List<Comparable> data1 = new ArrayList(data0);
+		LinkedList<Comparable> data3 = new LinkedList(data0);
+		
+		//System.out.println(data0);
+		Long[] data2 = data1.toArray(new Long[]{});
+		
+		List<Comparable> result1 = sort.mergeSort(data1);
+		sort.mergeSortInPlace(data3);
+		Arrays.sort(data2);
+		//System.out.println(result);
+		//System.out.println(data3);
+		//System.out.println(Arrays.asList(data2));
+		for (int i=0; i<data1.size(); i++) {
+			assertTrue(data0+" \nSort to:"+Arrays.asList(data1), result1.get(i).compareTo(data2[i])==0);
+			assertTrue(data0+" \nSort to:"+Arrays.asList(data1), data3.get(i).compareTo(data2[i])==0);
+		}
+	}
+
 }
