@@ -2,8 +2,8 @@ package org.tao.util.sort;
 
 import java.util.List;
 
-public class InsertionSort {
-	public static void insertionSort(List<Comparable> data) {
+public class SelectionSort {
+	public static void selectionSort(List<Comparable> data) {
 		for (int i=0; i<data.size(); ++i) {
 			int idxSwap = i;
 			for (int j=i; j<data.size(); ++j) {

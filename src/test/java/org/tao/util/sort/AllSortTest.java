@@ -33,6 +33,27 @@ public class AllSortTest {
 	}
 
 	@Test
+	public void testSelectionSort() {
+		SelectionSort sort = new SelectionSort();
+		
+		//Integer[] data = new Integer[]{2,30,5,89,7,4,3};
+		List<Comparable> data0 = new ArrayList();
+		Random rnd = new Random();
+		for (int i=0; i<1000; i++)
+			data0.add((long) (rnd.nextLong()%100));
+		List<Comparable> data1 = new ArrayList(data0);
+		//System.out.println(data0);
+		Long[] data2 = data1.toArray(new Long[]{});
+		
+		sort.selectionSort(data1);
+		Arrays.sort(data2);
+		//System.out.println(Arrays.asList(data1));
+		//System.out.println(Arrays.asList(data2));
+		for (int i=0; i<data1.size(); i++)
+			assertTrue(data0+" \nSort to:"+Arrays.asList(data1), data1.get(i).compareTo(data2[i])==0);
+	}
+
+	@Test
 	public void testInsertionSort() {
 		InsertionSort sort = new InsertionSort();
 		
