@@ -4,18 +4,16 @@ import java.util.List;
 
 public class InsertionSort {
 	public static void insertionSort(List<Comparable> data) {
-		for (int i=0; i<data.size(); ++i) {
-			int idxSwap = i;
-			for (int j=i; j<data.size(); ++j) {
-				if (data.get(idxSwap).compareTo(data.get(j))>0) 
-					idxSwap = j;
+		for (int i=1; i<data.size(); ++i) {
+			for (int j=i; j>0; --j) {
+				if (data.get(j-1).compareTo(data.get(j))>0) {
+					Comparable tmp = data.get(j-1);
+					data.set(j-1, data.get(j));
+					data.set(j, tmp);
+				}
+				else
+					break;
 			}
-			if (idxSwap!=i) {
-				Comparable tmp = data.get(idxSwap);
-				data.set(idxSwap, data.get(i));
-				data.set(i, tmp);
-			}
-			//System.out.println(data);
 		}
 	}
 }
