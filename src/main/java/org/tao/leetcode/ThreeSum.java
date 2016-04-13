@@ -33,4 +33,29 @@ public class ThreeSum {
         
         return res;
     }
+	
+	public int threeSum(int[] nums, int target) {
+		int closest = Integer.MAX_VALUE;
+        Arrays.sort(nums);
+        int l = nums.length;
+        for (int i=0; i< l-2; ++i) {
+        	int a=i+1, e=l-1;
+        	while (a<e) {
+        		final int sum = nums[i]+nums[a]+nums[e];
+        		if (Math.abs(sum-target)<Math.abs(closest==Integer.MAX_VALUE?closest:closest-target))
+        			closest = sum;
+        		if (sum==target) {
+        			return target;
+        		}
+        		else if (sum<target)
+        			++a;
+        		else
+        			--e;
+        	}
+        	while (i<l-2 && nums[i]==nums[i+1])
+        		++i;
+        }
+        
+        return closest;
+    }
 }
