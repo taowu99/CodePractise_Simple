@@ -3,22 +3,25 @@ package org.tao.leetcode;
 public class Palindrome {
 
 	public String longestPalindrome(String s) {
+		if (s==null || s.length() == 0)
+			return null;
+		
 		int[] maxPalindrome = new int[] { 0, 0 };
 		int i = 0;
 		while (i < s.length()) {
-			int[] ctrRange = neighborOfSameValueAsMe(s, i);
-			int[] palindrome = maxPalindromeCouldExtendTo(s, ctrRange[0] - 1, ctrRange[1] + 1);
+			int ctrRangeUpper = neighborOfSameValueAsMe(s, i);
+			int[] palindrome = maxPalindromeCouldExtendTo(s, i - 1, ctrRangeUpper + 1);
 			if ((palindrome[1] - palindrome[0]) > (maxPalindrome[1] - maxPalindrome[0]))
 				maxPalindrome = palindrome;
 
 			// skip the center range, because we have checked it already
-			i = ctrRange[1] + 1;
+			i = ctrRangeUpper + 1;
 		}
 
 		return s.substring(maxPalindrome[0], maxPalindrome[1] + 1);
 	}
 
-	private int[] neighborOfSameValueAsMe(String s, int idx) {
+	private int neighborOfSameValueAsMe(String s, int idx) {
 		//int a = idx - 1;
 		int e = idx + 1;
 		char me = s.charAt(idx);
@@ -30,7 +33,7 @@ public class Palindrome {
 
 		while (e < s.length() && s.charAt(e) == me)
 			++e;
-		return new int[] { idx, e - 1 };
+		return e - 1 ;
 	}
 
 	private int[] maxPalindromeCouldExtendTo(String s, int a, int e) {
