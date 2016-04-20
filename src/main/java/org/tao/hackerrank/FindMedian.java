@@ -1,4 +1,4 @@
-package org.tao.hackrank;
+package org.tao.hackerrank;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
