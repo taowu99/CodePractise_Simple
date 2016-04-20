@@ -12,15 +12,11 @@ public class ParentheseCombination {
     }
     
     private void generate(int leftCount, int rightCount, List<String> result, String prefix) {
-    	if (leftCount>0) {
+    	if (leftCount>0) 
     		generate(leftCount-1, rightCount, result, prefix+"(");
-    		if (rightCount>leftCount)
-    			generate(leftCount, rightCount-1, result, prefix+")");
-    	}
-    	else if (rightCount>0) {
+    	if (rightCount>leftCount) 
     		generate(leftCount, rightCount-1, result, prefix+")");
-    	}
-    	else
+    	if (leftCount==0 && rightCount==0)
     		result.add(prefix);
     }
 }
