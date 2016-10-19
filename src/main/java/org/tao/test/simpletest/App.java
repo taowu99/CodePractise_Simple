@@ -14,7 +14,7 @@ public class App
         //TwoStrings ts = new TwoStrings();
         //ts.checkTwoStrings();
         
-
+    	long aa=1_2_333;
     	Palindrome x = new Palindrome();
     	System.out.println(x.isPalindrome("abbeba"));
     	System.out.println(x.isPalindrome("abbba"));
