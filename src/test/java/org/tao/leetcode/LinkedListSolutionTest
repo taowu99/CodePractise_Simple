@@ -1,0 +1,57 @@
+package org.tao.leetcode;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+
+/**
+ * Created by Tao Wu on 10/19/2016.
+ */
+public class LinkedListSolutionTest {
+    private ListNode buildLinkedList(int[] data) {
+        ListNode head=null, tmp=null;
+        for (int val : data) {
+            if (head==null) {
+                head = new ListNode(val);
+                tmp = head;
+            }
+            else {
+                tmp.next = new ListNode(val);
+                tmp = tmp.next;
+            }
+        }
+
+        return head;
+    }
+
+    private String readLinkedList(ListNode head) {
+        StringBuffer out = new StringBuffer();
+        while (head!=null) {
+            out.append(head.val).append("->");
+            head = head.next;
+        }
+
+        return out.toString();
+    }
+
+    @Test
+    public void testSortListWithMergeSort() {
+        LinkedListSolution solution = new LinkedListSolution();
+
+        ListNode head = buildLinkedList(new int[] {9,2,1,10,6,2});
+        System.out.println(readLinkedList(head));
+        System.out.println(readLinkedList(solution.sortListWithMergeSort(head)));
+        assertTrue(head!=null);
+    }
+
+    @Test
+    public void testSortListWithQuickSort() {
+        LinkedListSolution solution = new LinkedListSolution();
+
+        //ListNode head = buildLinkedList(new int[] {9,2,1,10,6,2});
+        ListNode head = buildLinkedList(new int[] {9,2,1,10,6,2});
+        System.out.println(readLinkedList(head));
+        System.out.println(readLinkedList(solution.sortListWithQuickSort(head)));
+        assertTrue(head!=null);
+    }
+}
