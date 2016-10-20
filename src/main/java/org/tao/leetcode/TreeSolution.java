@@ -109,4 +109,20 @@ public class TreeSolution {
 
         return result;
     }
+
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> cache = new Stack();
+        if (root!=null)
+            cache.push(root);
+        while(!cache.empty()) {
+            TreeNode node = cache.pop();
+            result.add(0,node.val);
+            if (node.left!=null)
+                cache.push(node.left);
+            if (node.right!=null)
+                cache.push(node.right);
+        }
+        return result;
+    }
 }
