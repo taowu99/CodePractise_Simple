@@ -90,4 +90,23 @@ public class TreeSolution {
 
         return result;
     }
+
+    public List<Integer> inorderTraversal2(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> cache = new Stack();
+        TreeNode node = root;
+        while (node != null || !cache.empty()) {
+            if (node!=null) {
+                cache.push(node);
+                node = node.left;
+            }
+            else {
+                node = cache.pop();
+                result.add(node.val);
+                node = node.right;
+            }
+        }
+
+        return result;
+    }
 }
