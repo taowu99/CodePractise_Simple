@@ -16,6 +16,36 @@ class TreeNode {
 }
 
 public class TreeSolution {
+
+    public int numTrees2(int n) {
+        if (n<0)
+            return 0;
+        int[] res = new int[n+1];
+        res[0]=1;
+        res[1]=1;
+        for (int i=2; i<=n; ++i) {
+            res[i]=0;
+            for (int k=0; k<i/2; ++k)
+                res[i] += res[k]*res[i-k-1]*2;
+            if (i%2==1)
+                res[i] +=  res[i/2]*res[i/2];
+        }
+        return res[n];
+    }
+
+    public int numTrees(int n) {
+        if (n<0)
+            return 0;
+        int[] res = new int[n+1];
+        res[0]=1;
+        for (int i=1; i<=n; ++i) {
+            res[i]=0;
+            for (int k=0; k<i; ++k)
+                res[i] += res[k]*res[i-k-1];
+        }
+        return res[n];
+    }
+    
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList();
         if (root==null)
