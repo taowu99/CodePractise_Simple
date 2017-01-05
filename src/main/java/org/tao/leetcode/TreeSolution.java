@@ -155,4 +155,55 @@ public class TreeSolution {
         }
         return result;
     }
+
+    public List<Integer> inOrdrMorrisTravel(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        TreeNode cur = root;
+        while (cur!=null) {
+            if (cur.left==null) {
+                result.add(cur.val);
+                cur = cur.right;
+            }
+            else {
+                TreeNode pre = cur.left;
+                while (pre.right!=null && pre.right!=cur)
+                    pre = pre.right;
+
+                if (pre.right==null) {
+                    pre.right = cur;
+                    cur = cur.left;
+                }
+                else {
+                    pre.right=null;
+                    result.add(cur.val);
+                    cur = cur.right;
+                }
+            }
+        }
+        return result;
+    }
+    
+    public TreeNode reBuildTreeFromPreAndInOrder(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null || preorder.length == 0 || inorder.length == 0 || preorder.length != inorder.length)
+            return null;
+        return reBuildTreeFromPreAndInOrder(0,0,inorder.length-1,preorder,inorder);
+    }
+
+    private TreeNode reBuildTreeFromPreAndInOrder(int preStart, int intStart, int intEnd, int[] preorder, int[] inorder) {
+        int idx = -1;
+        for (int i=intStart; i<=intEnd; ++i)
+            if (inorder[i]==preorder[preStart]) {
+                idx=i;
+                break;
+            }
+        if (idx<0)
+            return null;
+        TreeNode node = new TreeNode(preorder[preStart]);
+        if (intStart==intEnd)
+            return node;
+
+        node.left=reBuildTreeFromPreAndInOrder(preStart+1, intStart, idx-1, preorder, inorder);
+        node.right=reBuildTreeFromPreAndInOrder(preStart+idx-intStart+1,idx+1, intEnd, preorder, inorder);
+        return node;
+    }
 }
