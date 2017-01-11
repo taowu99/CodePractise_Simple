@@ -27,7 +27,7 @@ public class TreeSolutionTest {
     }
 
     @Test
-    public void testRebuildBinaryTree() {
+    public void testRebuildBinaryTreeFromPreandInt() {
         TreeSolution solution = new TreeSolution();
         int[] prOrder = new int[] {1,2};
         int[] inOrder = new int[] {2,1};
@@ -44,5 +44,33 @@ public class TreeSolutionTest {
         for (int i=0; i<prOrder.length; ++i)
             assertEquals(preOrder.get(i).intValue(), prOrder[i]);
         System.out.println(preOrder);
+    }
+
+    @Test
+    public void testRebuildBinaryTreeFromPostandInt() {
+        TreeSolution solution = new TreeSolution();
+        int[] poOrder = new int[] {1,2};
+        int[] inOrder = new int[] {1,2};
+        TreeNode root =solution.reBuildTreeFromPostAndInOrder(poOrder, inOrder);
+        List<Integer> pstOrder = solution.postorderTraversal(root);
+        for (int i=0; i<poOrder.length; ++i)
+            assertEquals(pstOrder.get(i).intValue(), poOrder[i]);
+        System.out.println(pstOrder);
+
+        poOrder = new int[] {1,3,2};
+        inOrder = new int[] {1,2,3};
+        root =solution.reBuildTreeFromPostAndInOrder(poOrder, inOrder);
+        pstOrder = solution.postorderTraversal(root);
+        for (int i=0; i<poOrder.length; ++i)
+            assertEquals(pstOrder.get(i).intValue(), poOrder[i]);
+        System.out.println(pstOrder);
+
+        poOrder = new int[] {2,1};
+        inOrder = new int[] {1,2};
+        root =solution.reBuildTreeFromPostAndInOrder(poOrder, inOrder);
+        pstOrder = solution.postorderTraversal(root);
+        for (int i=0; i<poOrder.length; ++i)
+            assertEquals(pstOrder.get(i).intValue(), poOrder[i]);
+        System.out.println(pstOrder);
     }
 }
