@@ -206,4 +206,28 @@ public class TreeSolution {
         node.right=reBuildTreeFromPreAndInOrder(preStart+idx-intStart+1,idx+1, intEnd, preorder, inorder);
         return node;
     }
+
+    public TreeNode reBuildTreeFromPostAndInOrder(int[] postOrder, int[] inorder) {
+        if (postOrder == null || inorder == null || postOrder.length == 0 || inorder.length == 0 || postOrder.length != inorder.length)
+            return null;
+        return reBuildTreeFromPostAndInOrder(postOrder.length-1,0,inorder.length-1,postOrder,inorder);
+    }
+
+    private TreeNode reBuildTreeFromPostAndInOrder(int postEnd, int intStart, int intEnd, int[] postOrder, int[] inorder) {
+        int idx = -1;
+        for (int i=intStart; i<=intEnd; ++i)
+            if (inorder[i]==postOrder[postEnd]) {
+                idx=i;
+                break;
+            }
+        if (idx<0)
+            return null;
+        TreeNode node = new TreeNode(postOrder[postEnd]);
+        if (intStart==intEnd)
+            return node;
+
+        node.left=reBuildTreeFromPostAndInOrder(postEnd-intEnd+idx-1, intStart, idx-1, postOrder, inorder);
+        node.right=reBuildTreeFromPostAndInOrder(postEnd-1,idx+1, intEnd, postOrder, inorder);
+        return node;
+    }
 }
