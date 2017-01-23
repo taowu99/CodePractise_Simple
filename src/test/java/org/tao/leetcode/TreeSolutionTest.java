@@ -47,6 +47,26 @@ public class TreeSolutionTest {
     }
 
     @Test
+    public void testRebuildBinaryTreeFromPreandIntOOne() {
+        TreeSolution solution = new TreeSolution();
+        int[] prOrder = new int[] {1,2};
+        int[] inOrder = new int[] {2,1};
+        TreeNode root =solution.reBuildTreeFromPreAndInOrder(prOrder, inOrder);
+        List<Integer> preOrder = solution.preorderTraversal(root);
+        for (int i=0; i<prOrder.length; ++i)
+            assertEquals(preOrder.get(i).intValue(), prOrder[i]);
+        System.out.println(preOrder);
+
+        prOrder = new int[] {1,2,3,4,5};
+        inOrder = new int[] {2,1,3,4,5};
+        root =solution.reBuildTreeFromPreAndInOrder(prOrder, inOrder);
+        preOrder = solution.preorderTraversal(root);
+        for (int i=0; i<prOrder.length; ++i)
+            assertEquals(preOrder.get(i).intValue(), prOrder[i]);
+        System.out.println(preOrder);
+    }
+
+    @Test
     public void testRebuildBinaryTreeFromPostandInt() {
         TreeSolution solution = new TreeSolution();
         int[] poOrder = new int[] {1,2};
