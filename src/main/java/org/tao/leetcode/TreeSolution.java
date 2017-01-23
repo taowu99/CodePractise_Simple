@@ -182,6 +182,71 @@ public class TreeSolution {
         }
         return result;
     }
+
+    public TreeNode reBuildTreeFromPreAndInOrderIteration(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null || preorder.length == 0 || inorder.length == 0 || preorder.length != inorder.length)
+            return null;
+
+        Stack<TreeNode> stack = new Stack<>();
+        int idxPre=0, idxIn=0;
+        TreeNode proot = new TreeNode(-1);
+
+        TreeNode root = proot;
+        while (idxPre<preorder.length) {
+            TreeNode cur = null;
+            do{
+                TreeNode node = new TreeNode(preorder[idxPre++]);
+                stack.push(node);
+
+                if (cur==null)
+                    proot.right = node;
+                else
+                    cur.left=node;
+
+                cur = node;
+            }while (cur.val!=inorder[idxIn]);
+
+            while (stack.size()>0 && stack.peek().val==inorder[idxIn]) {
+                proot = stack.pop();
+                idxIn++;
+            }
+        }
+        return root.right;
+    }
+
+    public TreeNode reBuildTreeFromPreAndInOrderIteration_0(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null || preorder.length == 0 || inorder.length == 0 || preorder.length != inorder.length)
+            return null;
+
+        TreeNode root = null;
+
+        Stack<TreeNode> stack = new Stack<>();
+        int idxPre=0, idxIn=0;
+        TreeNode proot = null;
+        while (idxPre<preorder.length) {
+            TreeNode cur = proot;
+            do{
+                TreeNode node = new TreeNode(preorder[idxPre++]);
+                stack.push(node);
+
+                if (cur==proot && proot!=null)
+                    proot.right = node;
+
+                if (cur!=proot && cur!=null)
+                    cur.left=node;
+
+                if (root==null)
+                    root = node;
+                cur = node;
+            }while (cur.val!=inorder[idxIn]);
+
+            while (stack.size()>0 && stack.peek().val==inorder[idxIn]) {
+                proot = stack.pop();
+                idxIn++;
+            }
+        }
+        return root;
+    }
     
     public TreeNode reBuildTreeFromPreAndInOrder(int[] preorder, int[] inorder) {
         if (preorder == null || inorder == null || preorder.length == 0 || inorder.length == 0 || preorder.length != inorder.length)
