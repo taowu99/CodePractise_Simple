@@ -34,4 +34,36 @@ public class NumberSolution {
         return result.toString();
 
     }
+
+    public int mySqrt(int x) {
+        long res = x/2;
+        while (res>0 && res>x/res) {
+            res = (res+x/res)/2;
+        }
+        return (int)res;
+    }
+
+    public int mySqrt1(int x) {
+        if (x<0)
+            return -1;
+        else if (x==0)
+            return 0;
+
+        int left=1, right=x;
+
+        while (left<right) {
+            int mid=(left+right)/2;
+            if (mid*mid==x || left==mid)
+                return mid;
+            else if (mid>x/mid)
+                right = mid;
+            else if ((mid+1)>x/(mid+1))
+                return mid;
+            else
+                left = mid+1;
+            //System.out.println(left+","+right);
+        }
+
+        return left;
+    }
 }
