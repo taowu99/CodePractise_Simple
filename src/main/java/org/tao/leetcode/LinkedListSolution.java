@@ -97,4 +97,38 @@ public class LinkedListSolution {
 
         return leftHead.next;
     }
+
+    public void reorderList(ListNode head) {
+        if (head==null || head.next==null)
+            return;
+
+        //find mid
+        ListNode mid=head, tmp=head;
+        while(tmp.next!=null && tmp.next.next!=null) {
+            mid=mid.next;
+            tmp=tmp.next.next;
+        }
+
+        //reverse the second half
+        tmp=mid.next;
+        ListNode prv = null, t;
+        while (tmp !=null) {
+            t = tmp.next;
+            tmp.next = prv;
+            prv = tmp;
+            tmp = t;
+        }
+        mid.next =null;
+
+        //reorder
+        ListNode tmp1 = head, tmp2=prv;
+        while (tmp2!=null) {
+            t = tmp1.next;
+            tmp1.next = tmp2;
+            tmp1 = t;
+            t = tmp2.next;
+            tmp2.next = tmp1;
+            tmp2 = t;
+        }
+    }
 }
