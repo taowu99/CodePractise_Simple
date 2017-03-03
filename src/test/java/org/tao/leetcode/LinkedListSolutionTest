@@ -54,4 +54,21 @@ public class LinkedListSolutionTest {
         System.out.println(readLinkedList(solution.sortListWithQuickSort(head)));
         assertTrue(head!=null);
     }
+
+    @Test
+    public void testReorderList() {
+        LinkedListSolution solution = new LinkedListSolution();
+        ListNode head = buildLinkedList(new int[] {1,2,3,4,5});
+        solution.reorderList(head);
+        System.out.println(readLinkedList(head));
+        head = buildLinkedList(new int[] {1,2,3,4});
+        solution.reorderList(head);
+        System.out.println(readLinkedList(head));
+        head = buildLinkedList(new int[] {1});
+        solution.reorderList(head);
+        System.out.println(readLinkedList(head));
+        head = buildLinkedList(new int[] {1,2});
+        solution.reorderList(head);
+        System.out.println(readLinkedList(head));
+    }
 }
