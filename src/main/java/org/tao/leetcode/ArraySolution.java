@@ -6,7 +6,7 @@ public class ArraySolution {
         int lastJump =0;
         int maxJump = 0;
         for (int i=0; i<nums.length-1; ++i) {
-            maxJump=max(nums[i], maxJump-1);
+            maxJump=Math.max(nums[i], maxJump-1);
             if (--lastJump<=0) {
                 lastJump = maxJump;
                 steps++;
