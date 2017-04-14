@@ -29,6 +29,93 @@ public class SubstringSolution {
         }
         return d==Integer.MAX_VALUE? "":s.substring(head, d+head);
     }
+
+    public String getMaxSubOf2Char(String data) {
+        String result="";
+        if (data==null || data.length() ==0)
+            return result;
+
+        LinkedHashMap<Character, Integer> charPos=new LinkedHashMap<Character, Integer>(2) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Character,Integer> eldest) {
+                return 2<size();
+            }
+        };
+        for (int idxA=0, idxE=0; idxE<data.length(); ++idxE) {
+            if (!charPos.containsKey(data.charAt(idxE)) && charPos.size()==2){
+                final Character c = data.charAt(idxE-1);
+                idxA = charPos.entrySet().stream().filter(k-> !k.equals(c)).findFirst().get().getValue()+1;
+            }
+            charPos.remove(data.charAt(idxE));
+            charPos.put(data.charAt(idxE), idxE);
+            if (result.length() < (idxE - idxA +1) ) result = data.substring(idxA, idxE+1);
+        }
+
+        return result;
+    }
+
+    public String getMaxSubOf2Char_v2(String data) {
+        String result="";
+        if (data==null || data.length() ==0)
+            return result;
+
+        Map<Character, Integer> keyIndex=new HashMap<>();
+        for (int idxA=0, idxE=0; idxE<data.length(); ++idxE) {
+
+            if (keyIndex.size()==2 && !keyIndex.containsKey(data.charAt(idxE))) {
+                for (Map.Entry<Character, Integer> pair : keyIndex.entrySet())
+                    if (!pair.getKey().equals(data.charAt(idxE - 1))) {
+                        idxA = pair.getValue() + 1;
+                        keyIndex.remove(pair.getKey());
+                        break;
+                    }
+            }
+            keyIndex.put(data.charAt(idxE), idxE);
+            if (result.length() < (idxE - idxA +1) ) result = data.substring(idxA, idxE+1);
+        }
+
+        return result;
+    }
+
+    public String getMaxSubOf2Char_v1(String data) {
+        String result="";
+        if (data==null || data.length() ==0)
+            return result;
+
+        Map<Character, Integer> keyIndex=new HashMap<>();
+        for (int idxA=0, idxE=0; idxE<data.length(); ++idxE) {
+            keyIndex.put(data.charAt(idxE), idxE);
+
+            if (keyIndex.size()>2) {
+                List<Character> nxt = Arrays.asList(new Character[]{data.charAt(idxE - 1), data.charAt(idxE)});
+                for (Map.Entry<Character, Integer> pair : keyIndex.entrySet())
+                    if (!nxt.contains(pair.getKey())) {
+                        idxA = pair.getValue() + 1;
+                        keyIndex.remove(pair.getKey());
+                        break;
+                    }
+            }
+            if (result.length() < (idxE - idxA +1) ) result = data.substring(idxA, idxE+1);
+        }
+
+        return result;
+    }
+
+    public String getMaxSubOfDistinctChar(String data, int numberOfDistinctChars) {
+	    String result="";
+	    if (data==null || data.length() ==0)
+	        return result;
+
+        HashMap<Character, Integer> keyIndex=new HashMap<>();
+        for (int idxA=0, idxE=0; idxE<data.length(); ++idxE) {
+            keyIndex.put(data.charAt(idxE), idxE);
+            if (keyIndex.size()>numberOfDistinctChars)
+                idxA = keyIndex.remove(data.charAt(idxA))+1;
+            result = result.length() < (idxE - idxA +1) ? data.substring(idxA, idxE+1) : result;
+        }
+
+        return result;
+    }
 	
 	public static void main(String[] args) {
         Map<Integer, Integer> cache = new HashMap();
