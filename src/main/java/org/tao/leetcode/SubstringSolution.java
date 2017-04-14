@@ -102,16 +102,22 @@ public class SubstringSolution {
     }
 
     public String getMaxSubOfDistinctChar(String data, int numberOfDistinctChars) {
-	    String result="";
-	    if (data==null || data.length() ==0)
-	        return result;
+        String result="";
 
-        HashMap<Character, Integer> keyIndex=new HashMap<>();
+        LinkedHashMap<Character, Integer> charPos=new LinkedHashMap<Character, Integer>(2) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<Character,Integer> eldest) {
+                return numberOfDistinctChars<size();
+            }
+        };
         for (int idxA=0, idxE=0; idxE<data.length(); ++idxE) {
-            keyIndex.put(data.charAt(idxE), idxE);
-            if (keyIndex.size()>numberOfDistinctChars)
-                idxA = keyIndex.remove(data.charAt(idxA))+1;
-            result = result.length() < (idxE - idxA +1) ? data.substring(idxA, idxE+1) : result;
+            if (!charPos.containsKey(data.charAt(idxE)) && charPos.size()==numberOfDistinctChars){
+                final Character c = data.charAt(idxE-1);
+                idxA = charPos.entrySet().stream().filter(k-> !k.equals(c)).findFirst().get().getValue()+1;
+            }
+            charPos.remove(data.charAt(idxE));
+            charPos.put(data.charAt(idxE), idxE);
+            if (result.length() < (idxE - idxA +1) ) result = data.substring(idxA, idxE+1);
         }
 
         return result;
