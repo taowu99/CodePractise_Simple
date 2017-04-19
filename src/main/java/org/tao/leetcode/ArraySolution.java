@@ -108,4 +108,35 @@ public class ArraySolution {
                 
         return nums.length;
     }
+
+    public int singleNonDuplicate(int[] nums) {
+        int start=0, end=nums.length-1;
+        while (start<end) {
+            int mid=(start+end)/2;
+            if (nums[mid]!=nums[mid-1] && nums[mid]!=nums[mid+1])
+                return nums[mid];
+            else if (mid%2==1 && nums[mid]==nums[mid+1] || mid%2==0 && nums[mid]==nums[mid-1])
+                end =mid-1;
+            else
+                start =mid+1;
+        }
+        return nums[start];
+    }
+
+    public int singleNonDuplicate_v1(int[] nums) {
+        return singleNonDuplicate(nums, 0, nums.length-1);
+    }
+
+    public int singleNonDuplicate(int[] nums, int start, int end) {
+        if (start>=end)
+            return nums[start];
+
+        int mid = (start+end)/2;
+        if (nums[mid]!=nums[mid-1] && nums[mid]!=nums[mid+1])
+            return nums[mid];
+        else if (mid%2==1 && nums[mid]==nums[mid+1] || mid%2==0 && nums[mid]==nums[mid-1])
+            return singleNonDuplicate(nums, start, mid-1);
+        else
+            return singleNonDuplicate(nums, mid+1,end);
+    }
 }
