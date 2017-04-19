@@ -43,4 +43,16 @@ public class ArraySolutionTest {
 		assertEquals(solution.missingNumber(new int[]{2,0,1,3}),4);
 		assertEquals(solution.missingNumber(new int[]{4,0,1,3}),2);
 	}
+
+    @Test
+    public void testSingleNonDuplicate() {
+        ArraySolution solution = new ArraySolution();
+        Assert.assertEquals(1, solution.singleNonDuplicate(new int[]{1}));
+        Assert.assertEquals(2, solution.singleNonDuplicate(new int[]{1,1,2,3,3,4,4}));
+        Assert.assertEquals(1, solution.singleNonDuplicate(new int[]{1,2,2,3,3,4,4}));
+        Assert.assertEquals(1, solution.singleNonDuplicate(new int[]{1,2,2,3,3,4,4,5,5}));
+        Assert.assertEquals(3, solution.singleNonDuplicate(new int[]{1,1,2,2,3,4,4}));
+        Assert.assertEquals(5, solution.singleNonDuplicate(new int[]{1,1,2,2,4,4,5}));
+        Assert.assertEquals(9, solution.singleNonDuplicate(new int[]{1, 1, 2, 2, 4, 4, 5, 5,9}));
+    }
 }
