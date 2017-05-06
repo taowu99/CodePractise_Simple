@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.stream.IntStream;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ArraySolutionTest {
