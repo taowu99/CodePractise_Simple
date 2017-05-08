@@ -56,4 +56,13 @@ public class ArraySolutionTest {
         Assert.assertEquals(5, solution.singleNonDuplicate(new int[]{1,1,2,2,4,4,5}));
         Assert.assertEquals(9, solution.singleNonDuplicate(new int[]{1, 1, 2, 2, 4, 4, 5, 5,9}));
     }
+
+    @Test
+    public void testLargestNumber() {
+        ArraySolution solution = new ArraySolution();
+        Assert.assertEquals("0",solution.largestNumber(new int[]{0,0}));
+        Assert.assertEquals("99866032", solution.largestNumber(new int[]{60,6,3,2,99,8}));
+        Assert.assertEquals("9986603200", solution.largestNumber(new int[]{60,6,0,3,2,99,8,0}));
+        Assert.assertEquals( "100", solution.largestNumber(new int[]{1,0,0}));
+    }
 }
