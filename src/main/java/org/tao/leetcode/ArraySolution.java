@@ -139,4 +139,10 @@ public class ArraySolution {
         else
             return singleNonDuplicate(nums, mid+1,end);
     }
+
+    public String largestNumber(int[] nums) {
+        String[] cache = Arrays.stream(nums).mapToObj(String::valueOf).toArray(String[]::new);
+        Arrays.sort(cache,(String a,String b)->(b+a).compareTo(a+b));
+        return Arrays.stream(cache).reduce((x, y) -> x.equals("0") ? y : x + y).get();
+    }
 }
