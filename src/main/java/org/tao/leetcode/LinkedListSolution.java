@@ -131,4 +131,15 @@ public class LinkedListSolution {
             tmp2 = t;
         }
     }
+
+    public int leastBricks(List<List<Integer>> wall) {
+        LinkedHashMap<Integer, Integer> gaps = new LinkedHashMap<>();
+        for (List<Integer> line : wall) {
+            int distance=0;
+            for (int i=0; i<line.size()-1; ++i)
+                gaps.merge(distance+=line.get(i),1, Integer::sum);
+        }
+
+        return wall.size() - gaps.values().stream().max(Integer::compareTo).orElse(0);
+    }
 }
