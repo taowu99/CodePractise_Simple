@@ -71,4 +71,32 @@ public class LinkedListSolutionTest {
         solution.reorderList(head);
         System.out.println(readLinkedList(head));
     }
+
+    @Test
+    public void testLeastBricks() {
+        LinkedListSolution solution = new LinkedListSolution();
+        List<List<Integer>> wall = new ArrayList<>();
+        wall.add(Arrays.asList(new Integer[] {1,1}));
+        wall.add(Arrays.asList(new Integer[] {2}));
+        wall.add(Arrays.asList(new Integer[] {1,1}));
+        //System.out.println(solution.leastBricks(wall));
+        Assert.assertEquals(solution.leastBricks(wall),1);
+
+        wall.clear();
+        wall.add(Arrays.asList(new Integer[] {1}));
+        wall.add(Arrays.asList(new Integer[] {1}));
+        wall.add(Arrays.asList(new Integer[] {1}));
+        //System.out.println(solution.leastBricks(wall));
+        Assert.assertEquals(solution.leastBricks(wall),3);
+
+        wall.clear();
+        wall.add(Arrays.asList(new Integer[] {1,2,2,1}));
+        wall.add(Arrays.asList(new Integer[] {3,1,2}));
+        wall.add(Arrays.asList(new Integer[] {1,3,2}));
+        wall.add(Arrays.asList(new Integer[] {2,4}));
+        wall.add(Arrays.asList(new Integer[] {3,1,2}));
+        wall.add(Arrays.asList(new Integer[] {1,3,1,1}));
+        //System.out.println(solution.leastBricks(wall));
+        Assert.assertEquals(solution.leastBricks(wall),2);
+    }
 }
