@@ -1,5 +1,7 @@
 package org.tao.leetcode;
 
+import java.util.Arrays;
+
 public class ArraySolution {
     public int jump0(int[] nums) {
         int steps = 0;

@@ -1,5 +1,8 @@
 package org.tao.leetcode;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+
 /**
  * Created by Tao Wu on 10/19/2016.
  */
