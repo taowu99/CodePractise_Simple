@@ -1,6 +1,11 @@
 package org.tao.leetcode;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by zkdu8y8 on 2/15/2017.
@@ -65,5 +70,20 @@ public class NumberSolution {
         }
 
         return left;
+    }
+    
+    public List<List<Integer>> findDistanceMatches(int[] data, int x) {
+    	List<List<Integer>> result = new ArrayList<List<Integer>>();
+    	Set<Long> cache = new HashSet<Long>();
+    	for (int d : data) {
+    		if (cache.contains(new Long((long)d-x)))
+    			result.add(Arrays.asList(new Integer[]{d,d-x}));
+    		if (cache.contains(new Long((long)d+x)))
+    			result.add(Arrays.asList(new Integer[]{d,x+d}));
+    		
+    		cache.add(new Long(d));
+    	}
+    	
+    	return result;
     }
 }

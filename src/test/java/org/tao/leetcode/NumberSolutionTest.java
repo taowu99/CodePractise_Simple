@@ -28,4 +28,13 @@ public class NumberSolutionTest {
         for (int i=0; i<10; ++i)
             System.out.println("sqrt("+i+")="+solution.mySqrt(i));
     }
+    
+    @Test
+    public void testFindDistanceMatches() {
+    	NumberSolution solution = new NumberSolution();
+    	Assert.assertEquals(0,solution.findDistanceMatches(new int[]{},2).size());
+    	Assert.assertEquals(0,solution.findDistanceMatches(new int[]{10,1,5,6,4,3},20).size());
+    	Assert.assertEquals(3,solution.findDistanceMatches(new int[]{10,1,5,6,4,3},2));
+    	Assert.assertEquals(4,solution.findDistanceMatches(new int[]{10,1,5,6,4,3,Integer.MAX_VALUE,Integer.MAX_VALUE-2},2));
+    }
 }
